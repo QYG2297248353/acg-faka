@@ -1,11 +1,9 @@
-FROM php:8.0-fpm-alpine
+FROM php:8.0-apache
 
-WORKDIR /var/www/html
-
-COPY . /var/www/html
+COPY . /var/www/html/
 
 RUN docker-php-ext-install mysqli
 
-EXPOSE 9000
+EXPOSE 80
 
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]
