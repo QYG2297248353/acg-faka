@@ -23,7 +23,7 @@ EXPOSE 80
 
 VOLUME ["/var/www/html"]
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+COPY docker-entrypoint.sh /var/www/html/docker-entrypoint.sh
+RUN chmod +x /var/www/html/docker-entrypoint.sh
 
-CMD ["docker-entrypoint.sh"]
+CMD ["/var/www/html/docker-entrypoint.sh"]
