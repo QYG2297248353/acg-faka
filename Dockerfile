@@ -2,7 +2,7 @@ FROM php:8.0-apache
 
 WORKDIR /var/www/html
 
-COPY . /var/www/html/
+COPY . /tmp/html-temp/
 
 RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
@@ -15,13 +15,13 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install zip \
     && docker-php-ext-install mysqli
 
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
-
 RUN a2enmod rewrite
 
 RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+CMD ["docker-entrypoint.sh"]
