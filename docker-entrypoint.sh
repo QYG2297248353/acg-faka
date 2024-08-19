@@ -9,7 +9,7 @@ else
     echo "Config directory exists, skipping copy."
 fi
 
-rsync -a --exclude 'config' $TEMP_DIR/ $TARGET_DIR/
+rsync -a --exclude 'config' --exclude 'docker-entrypoint.sh' $TEMP_DIR/ $TARGET_DIR/
 
 chown -R www-data:www-data $TARGET_DIR
 
